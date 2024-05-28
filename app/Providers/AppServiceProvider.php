@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use http\Url;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Settings;
 use App\Models\AboutPage;
@@ -31,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
          /*view */
+
+        if(env('APP_ENV')!=="local"){
+         \Illuminate\Support\Facades\URL::forceScheme("https");
+        }
 
          view()->composer('*', function ($view) {
             
