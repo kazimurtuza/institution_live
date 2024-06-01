@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 
 class StripeController extends Controller
 {
-    
+
     public static function wishlist_check($course_id)
     {
         $wishlist = Wishlists::where('course_id', $course_id)->where('customer_id', Auth::user()->id)->where('status',0)->where('is_delete',0)->first();
@@ -25,7 +25,7 @@ class StripeController extends Controller
         else{
             return 0;
         }
-        
+
     }
     public static function subcribtion_check($course_id)
     {
@@ -37,7 +37,7 @@ class StripeController extends Controller
         else{
             return 0;
         }
-        
+
     }
 
     public function wishlistPost($course_id)
@@ -48,7 +48,7 @@ class StripeController extends Controller
 
         $addWishlist->save();
 
-        return redirect()->back()->with('success','Success fully Added wishlist');
+        return redirect()->back()->with('success','Successfully Added to the wishlist');
     }
 
     public function course_subscription()
@@ -66,21 +66,21 @@ class StripeController extends Controller
         $subcribed = $course_subscription->save();
         if($subcribed)
         {
-            
+
             $mailData = [
                 'title' => 'Course Subscribed'
-    
+
             ];
-    
-            try{ 
+
+            try{
             Mail::to(Auth::user()->email)->send(new NewCourse($mailData));
-    
+
                     }
                 catch(\Exception $e){
-                    
+
                 }
 
-            
+
             return redirect('/customer/thankyou');
         }
 
@@ -97,15 +97,15 @@ class StripeController extends Controller
     {
         $course_details = CoursesDB::where('id', $request->course_id)->where('status',0)->where('is_delete',0)->first();
         try{
-           
-            
+
+
              Stripe\Stripe::setApiKey('sk_test_51JegAwLRDA80gOtfIEEMcWH30khtaHybq7B6ZzHPgZtnQvUPSmqF5naQfQmVX0wrmQVwT3bUtm5D0YjFAQWJ3LSf00agQCVYpV');
-    
+
             $response=Stripe\Charge::create ([
                     "amount" => round($request->total_amount*100),
                     "currency" => "usd",
                     "source" => $request->stripeToken,
-                    "description" => "Course Payment" 
+                    "description" => "Course Payment"
             ]);
 
             //dd($response->balance_transaction);
@@ -133,13 +133,13 @@ class StripeController extends Controller
 
 
             //return redirect($store_slug.'/customer/thankyou');
-                
+
         }
         catch (CardException $e) {
                 // Handle card declined error
                 $error = $e->getError();
                 $errorMessage = $error->message;
-            
+
                 // You can log the error, return a response, or perform other actions
                 Session::flash('wrong',$errorMessage);
                 return back();
@@ -152,9 +152,9 @@ class StripeController extends Controller
                 // You can log the error, return a response, or perform other actions
                 return response()->json(['error' => $errorMessage], 500);
         }
-        
-       
-              
+
+
+
         return back();
     }
 

@@ -266,7 +266,7 @@
             <!-- Instructor -->
             <div class="tab__body-content tab-content tab-content-instructor" id="instructor">
 
-              <div class="course-info__main__col course__author flex-ctr">
+              <div class="course-info__main__col course__author flex-ctr item-start">
                 <figure class="course__author-img">
                   <img src="{{ asset('storage/app/public/' .$AdminDashboard->instructor_pic($data->instructor)) }}" alt="" />
                 </figure>

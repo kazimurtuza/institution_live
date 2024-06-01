@@ -18,12 +18,12 @@ use Illuminate\Support\Facades\Input;
 
 class Courses extends Controller
 {
-   
+
    public function course_offers()
    {
       $contact_page_content = CourseOffersDB::where('status', 0)->first();
         return view('frontend/course_offers', ['page_content' => $contact_page_content]);
-      
+
    }
    public static function rating_check($course_id)
    {
@@ -70,7 +70,7 @@ class Courses extends Controller
 
  public function filter_courses(Request $request)
  {
-    
+
     $all_courses = CoursesDB::where('is_delete',0)->where('payment_type',$request->payment_type)->paginate(9);
     //dd($all_courses);
     $contact_page_content = CoursePage::where('status', 0)->first();
@@ -110,16 +110,16 @@ class Courses extends Controller
          $total_enrolled = CourseSubscription::where('is_delete',0)->where('course_id', $id)->count();
 
          $contact_page_content = CoursePage::where('status', 0)->first();
- 
+
          $course_rating_comments = CourseRating::where('course_id',$id)->get();
-         
+
          $related_courses = CoursesDB::inRandomOrder()->limit(5)->where('id','!=', $id)->where('category', $get_course->category)->where('is_delete',0)->where('id', $id)->get();
- 
+
          $get_course_resources = CourseResources::where('is_delete',0)->where('course_id', $id)->get();
- 
+
          //dd($get_course_resources);
-         
- 
+
+
          return view('frontend.courses.details',['get_course_resources'=>$get_course_resources,'course_rating_comments'=>$course_rating_comments,'page_content' => $contact_page_content,'total_enrolled' => $total_enrolled,'data' => $get_course, 'related_courses'=> $related_courses]);
 
         }
@@ -127,7 +127,7 @@ class Courses extends Controller
          return redirect()->to('/courses');
         }
 
-       
+
     }
 
     public function course_rating_add(Request $request){
@@ -136,7 +136,7 @@ class Courses extends Controller
         $course_id=$request->course_id;
         $rating=$request->rating;
         $comments=$request->comments;
-        
+
 
         $update=CourseRating::where('user_id',$user_id)->where('course_id',$course_id)->first();
         if($update){
@@ -160,6 +160,6 @@ class Courses extends Controller
         $course_update->avg_rating=$avgRating;
         $course_update->save();
 
-        return redirect()->back()->with('success','Success fully Rating Updated');
+        return redirect()->back()->with('success','Successfully Rating Updated');
     }
 }

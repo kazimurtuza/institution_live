@@ -23,14 +23,14 @@
       <form action="#" class="container">
         <div class="faq__header flex-ctr-spb">
           <h2 class="faq__title">{{$page_content->name}}</h2>
-          <div class="faq__filter">
+          <!-- <div class="faq__filter">
             <div class="select-wrap">
-              {{-- <select name="faq-filter" id="faq-filter" class="faq-select">
+              <select name="faq-filter" id="faq-filter" class="faq-select">
                 <option value="students">Students</option>
                 <option value="teacher">Teacher</option>
-              </select> --}}
+              </select>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="faq__body flex-auto-spb tab">
           <nav class="faq__nav tab__header">
@@ -43,17 +43,17 @@
                   </a
                 >
               </li>
-                  
+
               @endforeach
-              
-              
+
+
             </ul>
           </nav>
 
           <div class="faq__items tab__body">
             @foreach ($all_faq as $faq)
             <div class="tab-content" id="tab{{$faq->cat_name}}">
-              @php 
+              @php
               $all_faq_questions =  App\Http\Controllers\Frontend\Faq::get_all_faq_questions($faq->cat_name);
 
               @endphp
@@ -93,7 +93,7 @@
                 </div>
               </div>
               @endforeach
-          
+
             </div>
 
             @endforeach
