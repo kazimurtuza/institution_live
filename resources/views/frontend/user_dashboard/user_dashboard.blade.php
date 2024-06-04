@@ -11,7 +11,7 @@
         <div class="dashboard__profile flex-ctr">
           <figure class="dashboard__profile-pic">
             @if($user_info->profile_photo_path)
-            <img src="{{ asset('storage/app/public/' .$user_info->profile_photo_path) }}" alt="" />
+            <img src="{{$user_info->profile_photo_path}}" alt="" />
 
             @else
             <img src="{{ asset('/assets/frontend/imgs/avt.jpg')}}" alt="" />
@@ -132,7 +132,7 @@
               <div class="tab-content__uploader">
                 <figure class="tab-content__upload-preview">
                   @if($user_info->profile_photo_path)
-                  <img src="{{ asset('storage/app/public/' .$user_info->profile_photo_path) }}" alt="" />
+                  <img src="{{$user_info->profile_photo_path}}" alt="" />
                   @else
                   <img src="{{ asset('/assets/frontend/imgs/avt.jpg')}}" alt="" />
                   @endif
@@ -263,7 +263,7 @@
             </div>
 
             <div class="tab-content__course card style-01 flex-ctr-spb">
-              <a href="#" class="card__figure"><span class="card__base btn-primary">@if($course->payment_type == 'Free') Free/Scholarship @else {{$course->payment_type}} @endif</span><img src="{{ asset('storage/app/public/' .$course->cover) }}" alt="" /></a>
+              <a href="#" class="card__figure"><span class="card__base btn-primary">@if($course->payment_type == 'Free') Free/Scholarship @else {{$course->payment_type}} @endif</span><img src="{{$course->cover}}" alt="" /></a>
               <div class="card__context">
                 <div class="card__row flex-ctr">
                   <div class="card__column flex-ctr">
@@ -384,7 +384,7 @@
                 <a href="#" class="card__btn btn-primary disable">Test Results</a>
                 @endif
                 <a href="{{route('course.details.page',['id'=>$course->id])}}" class="card__btn btn-primary bg-dark">View More</a>
-                
+
               </div>
             </div>
             @endforeach
@@ -404,7 +404,7 @@
 
             @foreach($wishlists as $wishlist)
             <div class="tab-content__course card style-01 flex-ctr-spb">
-              <a href="{{ route('course.details.page', $wishlist->course_id) }}" class="card__figure"><span class="card__base btn-primary">@if($wishlist->payment_type == 'Free') Free/Scholarship @else {{$wishlist->payment_type}} @endif</span><img src="{{ asset('storage/app/public/' .$wishlist->cover) }}" alt="" /></a>
+              <a href="{{ route('course.details.page', $wishlist->course_id) }}" class="card__figure"><span class="card__base btn-primary">@if($wishlist->payment_type == 'Free') Free/Scholarship @else {{$wishlist->payment_type}} @endif</span><img src="{{$wishlist->cover}}" alt="" /></a>
               <div class="card__context">
                 <div class="card__row flex-ctr">
                   <div class="card__column flex-ctr">

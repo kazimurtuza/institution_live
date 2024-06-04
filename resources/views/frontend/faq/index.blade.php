@@ -4,7 +4,7 @@
 <!-- Hero Section -->
 <section class="hero faq-hero">
     <div class="hero__bg">
-      <img src="{{ asset('storage/app/public/' .$page_content->page_banner) }}" alt="" />
+      <img src="{{$page_content->page_banner}}" alt="" />
     </div>
     <div class="container flex-ctr-ctr">
       <div class="hero__content">
@@ -107,7 +107,7 @@
     <section class="start-exploring fig-content">
       <div class="container flex-ctr-spb">
         <figure class="fig-content__thumb">
-          <img src="{{ asset('storage/app/public/' .$settings->new_img) }}" alt="" />
+          <img src="{{$settings->new_img}}" alt="" />
         </figure>
         <div class="fig-content__context">
           <h2 class="fig-content__title section-title">

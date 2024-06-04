@@ -5,7 +5,7 @@
  <!-- Hero Section -->
  <section class="hero listing-hero">
     <div class="hero__bg">
-      <img src="{{ asset('storage/app/public/' .$page_content->page_banner) }}" alt="" />
+      <img src="{{$page_content->page_banner}}" alt="" />
     </div>
     <div class="container flex-ctr-ctr">
       <div class="hero__content">
@@ -140,7 +140,7 @@
                   <option @if($payment_type == 'Paid') selected @endif value="Paid">Paid</option>
                   <option @if($payment_type == 'Free') selected @endif value="Free"> Free/Scholarship </option>
                 </select>
-                
+
               </div>
               <input value="Go" type="submit" class="card__btn btn-primary">
             </div>
@@ -153,7 +153,7 @@
                 @foreach($all_subjects as $subject)
                 <li>
                   <a href="{{route('courses_subject',['post_id'=>$subject->id])}}"><label for="tag1">{{$subject->name}}</label></a>
-                  
+
                 </li>
                 @endforeach
               </ul>
@@ -172,7 +172,7 @@
             <div class="listing-card card style-01">
                 <a href="{{ route('course.details.page', $course->id) }}" class="card__figure"
                   ><span class="card__base btn-primary">@if($course->payment_type == 'Free') Free/Scholarship @else {{$course->payment_type}} @endif</span
-                  ><img src="{{ asset('storage/app/public/' .$course->cover) }}" alt=""
+                  ><img src="{{$course->cover}}" alt=""
                 /></a>
                 <div class="card__context">
                   <div class="card__row flex-ctr-spb">
@@ -394,11 +394,11 @@
                     <p class="card__price">
                       @if($course->payment_type == 'Free')
                       Free/Scholarship
-                      @else 
+                      @else
                         @if($course->discount_price)
-                        AUD <del>{{$course->price}}</del> {{$course->discount_price}} 
+                        AUD <del>{{$course->price}}</del> {{$course->discount_price}}
                         @else
-                        AUD{{$course->price}} 
+                        AUD{{$course->price}}
                         @endif
                       @endif
                     </p>
@@ -406,10 +406,10 @@
                   </div>
                 </div>
               </div>
-                
+
             @endforeach
 
-          
+
         </div>
 
         {{$data->links()}}
@@ -470,7 +470,7 @@
     <section class="start-exploring fig-content">
       <div class="container flex-ctr-spb">
         <figure class="fig-content__thumb">
-          <img src="{{ asset('storage/app/public/' .$settings->new_img) }}" alt="" />
+          <img src="{{$settings->new_img}}" alt="" />
         </figure>
         <div class="fig-content__context">
           <h2 class="fig-content__title section-title">

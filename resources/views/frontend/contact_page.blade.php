@@ -10,7 +10,7 @@
 
     <div class="hero__bg">
 
-      <img src="{{ asset('storage/app/public/' .$page_content->page_banner) }}" alt="" />
+      <img src="{{$page_content->page_banner}}" alt="" />
 
     </div>
 
@@ -60,7 +60,7 @@
 
       <figure class="fig-content__thumb">
 
-        <img src="{{ asset('storage/app/public/' .$page_content->thumb_img) }}" alt="" />
+        <img src="{{$page_content->thumb_img}}" alt="" />
 
       </figure>
 
@@ -362,7 +362,7 @@
 
       <figure class="fig-content__thumb">
 
-        <img src="{{ asset('storage/app/public/' .$settings->new_img) }}" alt="" />
+        <img src="{{$settings->new_img}}" alt="" />
 
       </figure>
 

@@ -31,7 +31,7 @@
         <div class="course-info__main__row flex-ctr-spb">
           <div class="course-info__main__col course__author flex-ctr">
             <figure class="course__author-img">
-              <img src="{{ asset('storage/app/public/' .$AdminDashboard->instructor_pic($data->instructor)) }}" alt="" />
+              <img src="{{$AdminDashboard->instructor_pic($data->instructor) }}" alt="" />
             </figure>
             <div class="course__author-info">
               <p class="course__author-label">Created by: 3i International Islamic Institute</p>
@@ -211,8 +211,9 @@
           </div>
         </div>
         <figure class="course__thumb">
-          <img src="{{ asset('storage/app/public/' .$data->cover) }}" alt="" />
+          <img src="{{$data->cover}}" alt="" />
         </figure>
+
 
         <div class="course-info__main__tab tab">
           <div class="tab__header-wrap">
@@ -268,7 +269,7 @@
 
               <div class="course-info__main__col course__author flex-ctr item-start">
                 <figure class="course__author-img">
-                  <img src="{{ asset('storage/app/public/' .$AdminDashboard->instructor_pic($data->instructor)) }}" alt="" />
+                  <img src="{{$AdminDashboard->instructor_pic($data->instructor)}}" alt="" />
                 </figure>
                 <div class="course__author-info">
                   <p class="course__author-label" style="margin-bottom: 5px;">Name: <span>{{$AdminDashboard->instructor_name($data->instructor)}}</span></p>
@@ -458,7 +459,7 @@
                   @foreach($course_rating_comments as $course_rating_comment)
                     @if($course_rating_comment->comments)
                     <tr>
-                      <td> <img src="{{ asset('storage/app/public/' .$AdminDashboard->user_pic($course_rating_comment->user_id)) }}" alt=""></td>
+                      <td> <img src="{{$AdminDashboard->user_pic($course_rating_comment->user_id)}}" alt=""></td>
                       <td>{{$course_rating_comment->comments}}</td>
                     </tr>
                     @endif
@@ -508,12 +509,12 @@
                           </video> <br/><br/><br/> --}}
 
                           <video width="320" height="240" controls>
-                            <source src="{{ asset('storage/app/public/' .$get_course_resource->resources) }}" type="video/mp4">
+                            <source src="{{$get_course_resource->resources}}" type="video/mp4">
                           Your browser does not support the video tag.
                           </video> <br/><br/><br/>
 
                           @else
-                            <a href="{{ asset('storage/app/public/' .$get_course_resource->resources) }}">Download File</a>
+                            <a href="{{$get_course_resource->resources}}">Download File</a>
                           @endif
                           {{-- <img src="{{ asset('storage/app/public/' .$image) }}" style="width:100%"> --}}
                           </div>
@@ -654,6 +655,8 @@
           </div>
           <div class="aside__block__row flex-ctr-spb">
             <p class="aside__block__label">
+
+
               <span class="icon">
                 <svg
                   width="24"
@@ -1321,7 +1324,7 @@
   <section class="start-exploring fig-content">
     <div class="container flex-ctr-spb">
       <figure class="fig-content__thumb">
-        <img src="{{ asset('storage/app/public/' .$settings->new_img) }}" alt="" />
+        <img src="{{$settings->new_img}}" alt="" />
       </figure>
       <div class="fig-content__context">
         <h2 class="fig-content__title section-title">

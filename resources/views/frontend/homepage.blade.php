@@ -101,7 +101,7 @@
           </form> --}}
         </div>
         <figure class="intro-sec__thumb">
-          <img src="{{ asset('storage/app/public/' .$page_content->page_banner) }}" alt="" />
+          <img src="{{$page_content->page_banner}}" alt="" />
         </figure>
       </div>
     </div>
@@ -168,7 +168,7 @@
             ></a>
           </li>
         @endforeach
-         
+
         </ul>
       </div>
     </section>
@@ -231,7 +231,8 @@
           <div class="carousel__item course card style-01">
             <a href="{{ route('course.details.page', $related_course->id) }}" class="card__figure"
               ><span class="card__base btn-primary">@if($related_course->payment_type == 'Free') Free/Scholarship @else {{$related_course->payment_type}} @endif</span
-              ><img src="{{ asset('storage/app/public/' .$related_course->cover) }}" alt=""
+              >
+                <img src="{{ asset($related_course->cover) }}" alt=""
             /></a>
             <div class="card__context">
               <div class="card__row flex-ctr-spb">
@@ -274,7 +275,7 @@
                   >{{$related_course->course_duration}}
                 </div>
                 <div class="card__column flex-ctr">
-                  
+
                 <div class="course__rating-wrap">
                 <ul class="course__rating main-rating" style="width: {{ $related_course->avg_rating*100/5 }}%">
                 <li>
@@ -371,12 +372,12 @@
               <div class="card__row flex-ctr-spb">
                 <p class="card__price">
                   @if($related_course->payment_type == 'Free')
-                   Free/Scholarship 
+                   Free/Scholarship
                    @else
                     @if($related_course->discount_price)
-                    AUD <del>{{$related_course->price}}</del> {{$related_course->discount_price}} 
+                    AUD <del>{{$related_course->price}}</del> {{$related_course->discount_price}}
                     @else
-                      AUD{{$related_course->price}} 
+                      AUD{{$related_course->price}}
                     @endif
                     @endif
                   </p>
@@ -385,7 +386,7 @@
             </div>
           </div>
         @endforeach
-          
+
         </div>
       </div>
     </section>
@@ -407,7 +408,7 @@
           @foreach($all_features as $feature)
           <div class="features__card">
             <div class="features__card-icon">
-              <img width="65" src="{{ asset('storage/app/public/' .$feature->icon) }}" alt="" />
+              <img width="65" src="{{ asset($feature->icon) }}" alt="" />
             </div>
             <div class="features__card-context">
               <h3 class="features__card-title">{{$feature->title}}</h3>
@@ -574,7 +575,7 @@
             class="st-testimonials__carousel-item card style02 flex-auto-spb"
           >
             <figure class="card__figure">
-              <img src="{{ asset('storage/app/public/' .$testimonial->pic) }}" alt="" />
+              <img src="{{ asset($testimonial->pic) }}" alt="" />
             </figure>
             <div class="card__context">
               <ul class="card__rating flex-ctr">
@@ -835,7 +836,7 @@
                 </li>
 
                 @endif
-                
+
               </ul>
               <h3 class="card__title">{{$testimonial->title}}</h3>
               <p class="card__dsc text">
@@ -846,7 +847,7 @@
                 <p class="card__author-info">{{$testimonial->designation}}</p>
               </div>
             </div>
-            
+
           </div>
           @endforeach
         </div>
@@ -857,7 +858,7 @@
     <section class="start-exploring fig-content">
       <div class="container flex-ctr-spb">
         <figure class="fig-content__thumb">
-          <img src="{{ asset('storage/app/public/' .$settings->new_img) }}" alt="" />
+          <img src="{{ asset($settings->new_img) }}" alt="" />
         </figure>
         <div class="fig-content__context">
           <h2 class="fig-content__title section-title">

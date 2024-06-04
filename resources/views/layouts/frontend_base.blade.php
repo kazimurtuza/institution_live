@@ -257,7 +257,7 @@
       <div class="header__main">
         <div class="container flex-ctr-spb">
           <a href="/" class="heder__logo"
-            ><img src="{{ asset('storage/app/public/' .$settings->logo) }}" alt="Logo"
+            ><img src="{{$settings->logo}}" alt="Logo"
           /></a>
           <nav class="header__nav">
             <ul class="header__nav-list flex-ctr">
