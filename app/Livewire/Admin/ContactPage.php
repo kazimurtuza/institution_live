@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 use App\Models\ContactPage as ContactPageDB;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -10,7 +11,7 @@ class ContactPage extends Component
     use WithFileUploads;
 
     public $name,$thumb_img,$page_summery,$contact_head,$contact_summery,$form_head,$form_summery,$address,$phone,$email,$map_source,$meta_title,$meta_details,$page_banner,$id;
-    
+
     public function mount()
     {
         $post_details = ContactPageDB::where('id', 1)->first();
@@ -32,7 +33,7 @@ class ContactPage extends Component
     public function store()
     {
         //dd('ok');
-       
+
         //$this->validate();
 
         $addPost = ContactPageDB::find($this->id);
@@ -50,24 +51,31 @@ class ContactPage extends Component
         $addPost->meta_title = $this->meta_title;
         $addPost->meta_details = $this->meta_details;
 
-        
+
 
 
         if($this->page_banner)
         {
-            $file_to_store=$this->page_banner->store('pages_banner','public');
+//            $file_to_store=$this->page_banner->store('pages_banner','public');
+
+            $path = $this->page_banner->store('images', 's3');
+            $file_to_store = Storage::disk('s3')->url($path);
+
             $addPost->page_banner = $file_to_store;
         }
         else{}
 
         if($this->thumb_img)
         {
-            $file_to_store=$this->thumb_img->store('thumb_img','public');
+//            $file_to_store=$this->thumb_img->store('thumb_img','public');
+
+            $path = $this->thumb_img->store('images', 's3');
+            $file_to_store = Storage::disk('s3')->url($path);
             $addPost->thumb_img = $file_to_store;
         }
         else{}
 
-        
+
 
         $added = $addPost->save();
 
@@ -79,7 +87,7 @@ class ContactPage extends Component
             session()->flash('add_message', 'Sorry !');
         }
     }
-    
+
     public function render()
     {
         return view('livewire.admin.contact-page')->layout('layouts.admin_base');

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 use App\Models\Instructors;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -32,7 +33,11 @@ class AddInstructors extends Component
 
         if($this->pic)
         {
-            $file_to_store=$this->pic->store('instructors','public');
+//            $file_to_store=$this->pic->store('instructors','public');
+
+            $path = $this->pic->store('images', 's3');
+            $file_to_store = Storage::disk('s3')->url($path);
+
             $addInstructor->pic = $file_to_store;
         }
         else{}

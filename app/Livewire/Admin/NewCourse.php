@@ -6,13 +6,14 @@ use App\Models\Categories;
 use App\Models\Subjects;
 use App\Models\Instructors;
 use App\Models\CourseResources;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 
 class NewCourse extends Component
 {
-    
+
     use WithFileUploads;
 
     public $category,$subject,$title,$payment_type,$price,$discount_price,$discount_duration,$course_duration,$lesson,$course_level,$language,$subtitle_language,$summery,$cover,$overview,$curiculm,$instructor,$course_points;
@@ -75,13 +76,13 @@ class NewCourse extends Component
                 $imagesName = '';
                 foreach($this->resourses as $key=>$gallery_image)
                 {
-                    $imgPathName = $gallery_image->store('resources','public');
+//                    $imgPathName = $gallery_image->store('resources','public');
 
+                    $path = $gallery_image->store('gallery', 's3');
+                    $file_to_store = Storage::disk('s3')->url($path);
                     $course_resources = new CourseResources();
-
                     $course_resources->course_id = $get_last_id+1;
-                    $course_resources->resources = $imgPathName;
-
+                    $course_resources->resources = $file_to_store;
                     $course_resources->save();
 
                     //dd($imgPathName);
@@ -98,7 +99,11 @@ class NewCourse extends Component
 
         if($this->cover)
         {
-            $file_to_store=$this->cover->store('courses','public');
+//            $file_to_store=$this->cover->store('courses','public');
+
+            $path = $this->cover->store('gallery', 's3');
+            $file_to_store = Storage::disk('s3')->url($path);
+
             $addCourse->cover = $file_to_store;
         }
         else{}
@@ -115,10 +120,10 @@ class NewCourse extends Component
 
         }
 
-        
+
     }
 
- 
+
     public function render()
     {
         $all_categories = Categories::where('is_delete',0)->get();

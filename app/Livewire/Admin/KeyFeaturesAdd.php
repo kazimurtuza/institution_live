@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 use App\Models\KeyFeaturs;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -30,7 +31,9 @@ class KeyFeaturesAdd extends Component
 
         if($this->icon)
         {
-            $file_to_store=$this->icon->store('key_features','public');
+//            $file_to_store=$this->icon->store('key_features','public');
+            $path = $this->icon->store('images', 's3');
+            $file_to_store = Storage::disk('s3')->url($path);
             $addInstructor->icon = $file_to_store;
         }
         else{}

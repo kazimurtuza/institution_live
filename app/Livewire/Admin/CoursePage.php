@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 use App\Models\CoursePage as CoursePageDB;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -31,7 +32,7 @@ class CoursePage extends Component
     public function store()
     {
         //dd('ok');
-       
+
         //$this->validate();
 
         $addPost = CoursePageDB::find($this->id);
@@ -48,17 +49,19 @@ class CoursePage extends Component
         $addPost->meta_title = $this->meta_title;
         $addPost->meta_details = $this->meta_details;
 
-        
+
 
 
         if($this->page_banner)
         {
-            $file_to_store=$this->page_banner->store('pages_banner','public');
+//            $file_to_store=$this->page_banner->store('pages_banner','public');
+            $path = $this->page_banner->store('images', 's3');
+            $file_to_store = Storage::disk('s3')->url($path);
             $addPost->page_banner = $file_to_store;
         }
         else{}
 
-        
+
 
         $added = $addPost->save();
 

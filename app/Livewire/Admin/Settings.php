@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 use App\Models\Settings as SettingsDB;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -29,12 +30,7 @@ class Settings extends Component
 
     public function store()
     {
-        //dd('ok');
-       
-        //$this->validate();
-
         $addPost = SettingsDB::find($this->id);
-
         $addPost->address = $this->address;
         $addPost->phone = $this->phone;
         $addPost->email = $this->email;
@@ -48,26 +44,29 @@ class Settings extends Component
         $addPost->fotter_summery = $this->fotter_summery;
         $addPost->new_details = $this->new_details;
 
-        
-
-
         if($this->logo)
         {
-            $file_to_store=$this->logo->store('logo','public');
-            $addPost->logo = $file_to_store;
+            $path = $this->logo->store('images', 's3');
+            $url = Storage::disk('s3')->url($path);
+            $addPost->logo = $url;
         }
         else{}
 
         if($this->favicon)
         {
-            $file_to_store1=$this->favicon->store('logo','public');
+//          $file_to_store1=$this->favicon->store('logo','public');
+
+            $path = $this->favicon->store('images', 's3');
+            $file_to_store1 = Storage::disk('s3')->url($path);
+
             $addPost->favicon = $file_to_store1;
         }
         else{}
 
         if($this->newimg)
         {
-            $file_to_store2=$this->newimg->store('newimg','public');
+            $path = $this->newimg->store('images', 's3');
+            $file_to_store2 = Storage::disk('s3')->url($path);
             $addPost->new_img = $file_to_store2;
         }
         else{}

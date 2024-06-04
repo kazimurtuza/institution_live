@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 use App\Models\AboutPage as AboutPageDB;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -32,7 +33,7 @@ class AboutPage extends Component
     public function store()
     {
         //dd('ok');
-       
+
         //$this->validate();
 
         $addPost = AboutPageDB::find($this->id);
@@ -50,38 +51,49 @@ class AboutPage extends Component
         $addPost->meta_title = $this->meta_title;
         $addPost->meta_details = $this->meta_details;
 
-        
+
 
 
         if($this->page_banner)
         {
-            $file_to_store=$this->page_banner->store('pages_banner','public');
+//            $file_to_store=$this->page_banner->store('pages_banner','public');
+            $path = $this->page_banner->store('images', 's3');
+            $file_to_store = Storage::disk('s3')->url($path);
+
             $addPost->page_banner = $file_to_store;
         }
         else{}
 
         if($this->chairman_pic)
         {
-            $file_to_store=$this->chairman_pic->store('pages_banner','public');
+//            $file_to_store=$this->chairman_pic->store('pages_banner','public');
+            $path = $this->chairman_pic->store('images', 's3');
+            $file_to_store = Storage::disk('s3')->url($path);
             $addPost->chairman_pic = $file_to_store;
         }
         else{}
 
         if($this->vission_pic)
         {
-            $file_to_store=$this->vission_pic->store('pages_banner','public');
+//            $file_to_store=$this->vission_pic->store('pages_banner','public');
+            $path = $this->vission_pic->store('images', 's3');
+            $file_to_store = Storage::disk('s3')->url($path);
+
             $addPost->vission_pic = $file_to_store;
         }
         else{}
 
         if($this->mission_pic)
         {
-            $file_to_store=$this->mission_pic->store('pages_banner','public');
+//            $file_to_store=$this->mission_pic->store('pages_banner','public');
+
+            $path = $this->mission_pic->store('images', 's3');
+            $file_to_store = Storage::disk('s3')->url($path);
             $addPost->mission_pic = $file_to_store;
         }
         else{}
 
-        
+
 
         $added = $addPost->save();
 

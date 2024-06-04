@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 use App\Models\Testimonials;
+use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 use Livewire\Component;
 
@@ -25,7 +26,7 @@ class TestimonialUpdate extends Component
     public function store()
     {
         //dd('ok');
-       
+
 
         $addPost = Testimonials::find($this->id);
 
@@ -37,7 +38,11 @@ class TestimonialUpdate extends Component
 
         if($this->pic)
         {
-            $file_to_store=$this->pic->store('testmonials','public');
+//            $file_to_store=$this->pic->store('testmonials','public');
+
+            $path = $this->pic->store('images', 's3');
+            $file_to_store =Storage::disk('s3')->url($path);
+
             $addPost->pic = $file_to_store;
         }
         else{}
